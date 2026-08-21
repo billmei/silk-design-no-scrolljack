@@ -6,6 +6,14 @@ Most generated pages come out static. Default scrollbars, sections that just app
 hover states that do nothing. This is a catalog of motion and design-token techniques,
 and it tells the agent to reach for them by default rather than only when asked.
 
+## Install
+
+```
+git clone https://github.com/<you>/silk-design ~/.claude/skills/silk-design
+```
+
+Then ask for a site, or name a composition directly: `/silk-design coffee-shop`.
+
 ## What's in it
 
 A foundation to apply on every build: Lenis smooth scroll at the root, scroll bounce
@@ -26,14 +34,6 @@ pairings and ten style skins you switch by swapping three CSS blocks.
 
 Twenty-three reference compositions, each with a palette, a type choice, a section rhythm
 and an effect set. They are starting points, not templates to fill in.
-
-## Install
-
-```
-git clone https://github.com/<you>/silk-design ~/.claude/skills/silk-design
-```
-
-Then ask for a site, or name a composition directly: `/silk-design coffee-shop`.
 
 ## Stack
 
