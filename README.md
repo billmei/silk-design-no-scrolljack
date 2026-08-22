@@ -23,7 +23,10 @@ Six sites built with this skill, they are all in German tho:
 git clone https://github.com/bendrape1-byte/silk-design ~/.claude/skills/silk-design
 ```
 
-Then ask for a site, or name a composition directly: `/silk-design Reference22`.
+Then ask your coding agent to build a website using the /silk-design skill and give it additional information such as:
+- Who you are (who this website is for)
+- What the use case of the website is
+- Add any additional information, photos or videos for it to use
 
 ## What's in it
 
