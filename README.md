@@ -9,7 +9,7 @@ and it tells the agent to reach for them by default rather than only when asked.
 ## Install
 
 ```
-git clone https://github.com/<you>/silk-design ~/.claude/skills/silk-design
+git clone https://github.com/bendrape1-byte/silk-design ~/.claude/skills/silk-design
 ```
 
 Then ask for a site, or name a composition directly: `/silk-design Reference22`.
