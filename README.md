@@ -6,6 +6,17 @@ Most generated pages come out static. Default scrollbars, sections that just app
 hover states that do nothing. This is a catalog of motion and design-token techniques,
 and it tells the agent to reach for them by default rather than only when asked.
 
+## Results
+
+Six sites built with this skill, all live, all in Frankfurt:
+
+- [uni.café](https://uni-cafe.bendrape1.workers.dev/), café
+- [The Hair House](https://the-hair-house.bendrape1.workers.dev/), salon and colour studio
+- [Kronberger](https://kronberger-website.bendrape1.workers.dev/), bakery and patisserie in the Nordend
+- [The Coffee Club 29](https://coffee-club29.bendrape1.workers.dev/), café in the Europaviertel
+- [Mina](https://mina-cafe.com/), Viennese coffeehouse and Egyptian kitchen in Sachsenhausen
+- [Café OPITZ im Goethehaus](https://cafe-opitz.bendrape1.workers.dev/), patisserie at the Goethe House
+
 ## Install
 
 ```
