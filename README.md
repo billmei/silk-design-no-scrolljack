@@ -11,11 +11,11 @@ and it tells the agent to reach for them by default rather than only when asked.
 Six sites built with this skill, they are all in German tho:
 
 - [uni.café](https://uni-cafe.bendrape1.workers.dev/), café
-- [The Hair House](https://the-hair-house.bendrape1.workers.dev/), salon and colour studio
-- [Kronberger](https://kronberger-website.bendrape1.workers.dev/), bakery and patisserie in the Nordend
-- [The Coffee Club 29](https://coffee-club29.bendrape1.workers.dev/), café in the Europaviertel
-- [Mina](https://mina-cafe.com/), Viennese coffeehouse and Egyptian kitchen in Sachsenhausen
-- [Café OPITZ im Goethehaus](https://cafe-opitz.bendrape1.workers.dev/), patisserie at the Goethe House
+- [The Hair House](https://the-hair-house.bendrape1.workers.dev/), hair studio for women
+- [Kronberger](https://kronberger-website.bendrape1.workers.dev/), bakery
+- [The Coffee Club 29](https://coffee-club29.bendrape1.workers.dev/), café
+- [Mina](https://mina-cafe.com/), café
+- [Café OPITZ im Goethehaus](https://cafe-opitz.bendrape1.workers.dev/), café
 
 ## Install
 
