@@ -10,12 +10,14 @@ and it tells the agent to reach for them by default rather than only when asked.
 
 Six sites built with this skill, they are all in German tho:
 
-- [uni.café](https://uni-cafe.bendrape1.workers.dev/), café
 - [The Hair House](https://the-hair-house.bendrape1.workers.dev/), hair studio for women
 - [Kronberger](https://kronberger-website.bendrape1.workers.dev/), bakery
 - [The Coffee Club 29](https://coffee-club29.bendrape1.workers.dev/), café
 - [Mina](https://mina-cafe.com/), café
 - [Café OPITZ im Goethehaus](https://cafe-opitz.bendrape1.workers.dev/), café
+- [Oeffner Media](https://www.oeffnermedia.com/), Social Media Agency
+- [Orthotrain](https://orthotrain-frankfurt.bendrape1.workers.dev/), Physio-Therapy
+- [F-Studios](https://f-studios-six.vercel.app/), Nail Studio
 
 ## Install
 
