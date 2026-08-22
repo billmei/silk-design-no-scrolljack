@@ -8,7 +8,7 @@ and it tells the agent to reach for them by default rather than only when asked.
 
 ## Results
 
-Six sites built with this skill, all live, all in Frankfurt:
+Six sites built with this skill, they are all in German tho:
 
 - [uni.café](https://uni-cafe.bendrape1.workers.dev/), café
 - [The Hair House](https://the-hair-house.bendrape1.workers.dev/), salon and colour studio
