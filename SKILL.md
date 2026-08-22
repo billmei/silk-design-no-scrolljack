@@ -73,9 +73,9 @@ Each points to a reference file (loaded only when you need it) and/or a drop-in 
 
 ## Reference a worked example — `/silk-design <name>`
 The catalog carries **23 worked reference compositions** built from this exact toolbox. When the
-user names one (`/silk-design luxury-real-estate`, `/silk-design auto-detailing`, or "build it
+user names one (`/silk-design Reference15`, `/silk-design Reference1`, or "build it
 like the coffee one"), pull it from `references/templates.md` — palette, font, section rhythm, and the signature
-effects it used. Match the name loosely (folder or vertical both resolve).
+effects it used. A number resolves directly; a described mood resolves against each row's vibe line.
 **A referenced composition is a mood-board + wireframe, not a source file:** take its **skin**
 (palette, font, radius, card/button style, effects) and its **skeleton** (section rhythm,
 loosely) — **never its flesh** (copy, images, brand, or a 1:1 layout). The new site has its own

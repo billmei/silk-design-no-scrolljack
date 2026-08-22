@@ -1,25 +1,26 @@
-/* product-showcase — single-object minimal */
+/* Reference22 — cream & espresso */
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "../../assets/masks.css";
 @import "../../assets/animations.css";
 
 :root {
-  /* palette: warm neutral (light) */
-  --background: #f1f1f1;
-  --card: #f9f9f9;
-  --foreground: #1A1A1A;
-  --primary-cta: #1A1A1A;
-  --primary-cta-text: #FFFFFF;
+  /* palette: cream espresso (light) */
+  --background: #F5F0E8;
+  --card: #EDE7DB;
+  --foreground: #2C1810;
+  --primary-cta: #2C1810;
+  --primary-cta-text: #F5F0E8;
   --secondary-cta: #FFFFFF;
-  --secondary-cta-text: #1A1A1A;
-  --accent: #7A7A72;
-  --background-accent: #E5E4DF;
+  --secondary-cta-text: #2C1810;
+  --accent: #8B7355;
+  --background-accent: #6F4E37;
 
   /* border radius: soft */
-  --radius: 1.5rem;
+  --radius: 1.75rem;
 
-  /* content width: standard */
-  --width-content-width: clamp(40rem, 72.5vw, 80rem);
+  /* content width: compact */
+  --width-content-width: clamp(40rem, 67.5vw, 100rem);
 
   /* utilities */
   --vw-1_5: 1.5vw;
@@ -33,20 +34,20 @@
   --width-carousel-item-4: calc(var(--width-content-width) / 4 - var(--vw-1_5) / 4 * 3);
 
   /* type scale: medium */
-  --text-2xs: clamp(0.465rem, 0.62vw, 0.62rem);
-  --text-xs: clamp(0.54rem, 0.72vw, 0.72rem);
-  --text-sm: clamp(0.615rem, 0.82vw, 0.82rem);
-  --text-base: clamp(0.69rem, 0.92vw, 0.92rem);
-  --text-lg: clamp(0.75rem, 1vw, 1rem);
-  --text-xl: clamp(0.825rem, 1.1vw, 1.1rem);
-  --text-2xl: clamp(0.975rem, 1.3vw, 1.3rem);
-  --text-3xl: clamp(1.2rem, 1.6vw, 1.6rem);
-  --text-4xl: clamp(1.5rem, 2vw, 2rem);
-  --text-5xl: clamp(2.025rem, 2.75vw, 2.75rem);
-  --text-6xl: clamp(2.475rem, 3.3vw, 3.3rem);
-  --text-7xl: clamp(3rem, 4vw, 4rem);
-  --text-8xl: clamp(3.5rem, 4.5vw, 4.5rem);
-  --text-9xl: clamp(5.25rem, 7vw, 7rem);
+  --text-2xs: clamp(0.465rem, 0.62vw, 0.64rem);
+  --text-xs: clamp(0.54rem, 0.72vw, 0.74rem);
+  --text-sm: clamp(0.615rem, 0.82vw, 0.84rem);
+  --text-base: clamp(0.69rem, 0.92vw, 0.94rem);
+  --text-lg: clamp(0.75rem, 1vw, 1.02rem);
+  --text-xl: clamp(0.825rem, 1.1vw, 1.13rem);
+  --text-2xl: clamp(0.975rem, 1.4vw, 1.4rem);
+  --text-3xl: clamp(1.2rem, 1.71vw, 1.72rem);
+  --text-4xl: clamp(1.5rem, 2.2vw, 2.21rem);
+  --text-5xl: clamp(2.025rem, 3.03vw, 3.05rem);
+  --text-6xl: clamp(2.475rem, 3.65vw, 3.73rem);
+  --text-7xl: clamp(3rem, 4.41vw, 4.52rem);
+  --text-8xl: clamp(3.5rem, 4.97vw, 5.09rem);
+  --text-9xl: clamp(5.25rem, 7.73vw, 7.92rem);
 }
 
 /* type scale: medium (mobile) */
@@ -66,7 +67,7 @@
     --text-7xl: 10vw;
     --text-8xl: 12vw;
     --text-9xl: 14vw;
-    --width-content-width: 85vw;
+    --width-content-width: 80vw;
     --width-carousel-padding: calc((100vw - var(--width-content-width)) / 2 + 1px - 1rem);
     --width-carousel-padding-controls: calc((100vw - var(--width-content-width)) / 2 + 1px);
     --width-carousel-item-2: var(--width-content-width);
@@ -89,7 +90,7 @@
 
   /* Fonts */
   --font-sans: "Inter", sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-serif: "Caveat", sans-serif;
   --font-tight: "Inter Tight", sans-serif;
   --font-mono: monospace;
 
@@ -126,11 +127,12 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0);
+  scrollbar-color: rgba(255, 255, 255, 1) rgba(255, 255, 255, 0);
 }
 
 html {
   overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -141,6 +143,7 @@ body {
   position: relative;
   min-height: 100vh;
   overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
 h1,
@@ -149,35 +152,39 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", sans-serif;
+  font-family: "Caveat", sans-serif;
+}
+
+.card {
+  backdrop-filter: blur(8px);
+  background: linear-gradient(to bottom right, color-mix(in srgb, var(--color-card) 80%, transparent), color-mix(in srgb, var(--color-card) 40%, transparent));
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid var(--color-card);
+}
+
+.primary-button {
+  background: var(--color-primary-cta);
+  box-shadow: color-mix(in srgb, var(--color-background) 20%, transparent) 0px 3px 1px 0px inset, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 0.839802px 0.503881px -0.3125px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 1.99048px 1.19429px -0.625px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 3.63084px 2.1785px -0.9375px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 6.03627px 3.62176px -1.25px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 9.74808px 5.84885px -1.5625px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 15.9566px 9.57398px -1.875px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 27.4762px 16.4857px -2.1875px, color-mix(in srgb, var(--color-primary-cta) 13%, transparent) 0px 50px 30px -2.5px;
+}
+
+.secondary-button {
+  backdrop-filter: blur(8px);
+  background: linear-gradient(to bottom right, color-mix(in srgb, var(--color-secondary-cta) 80%, transparent), var(--color-secondary-cta));
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid var(--color-secondary-cta);
 }
 
 .primary-button,
 .secondary-button,
 button.card {
-  min-height: 3.25rem;
-  min-width: 3.25rem;
+  min-height: 3.35rem;
+  min-width: 3.35rem;
   font-size: var(--text-base);
 }
 
-.card {
-  background: var(--color-card);
-  box-shadow: color-mix(in srgb, var(--color-primary-cta) 5%, transparent) 0px 0.706592px 0.706592px -0.666667px, color-mix(in srgb, var(--color-primary-cta) 3%, transparent) 0px 1.80656px 1.80656px -1.33333px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 3.62176px 3.62176px -2px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 6.8656px 6.8656px -2.66667px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 13.6468px 13.6468px -3.33333px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 30px 30px -4px;
-  box-shadow: none;
-}
-
-.primary-button {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-cta) 75%, var(--color-background)) -50%, var(--color-primary-cta) 75%);
-  border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
-}
-
-.secondary-button {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--color-secondary-cta) 75%, var(--color-background)) -35%, var(--color-secondary-cta) 75%);
-  border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
-  box-shadow: none;
-}
-
 button.primary-button,
-button.secondary-button {
-  border-radius: 10rem;
+button.secondary-button,
+button.card {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }

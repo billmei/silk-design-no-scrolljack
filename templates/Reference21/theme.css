@@ -1,26 +1,25 @@
-/* personal-blogger — warm personal blog */
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap");
+/* Reference21 — single-object minimal */
 @import "tailwindcss";
 @import "../../assets/masks.css";
 @import "../../assets/animations.css";
 
 :root {
-  /* palette: warm-personal (light) */
-  --background: #f5f3f0;
-  --card: #ffffff;
-  --foreground: #1a1a1a;
-  --primary-cta: #1a1a1a;
-  --primary-cta-text: #f5f3f0;
-  --secondary-cta: #f5f3f0;
-  --secondary-cta-text: #1a1a1a;
-  --accent: #4CAF50;
-  --background-accent: #ebe7e1;
+  /* palette: warm neutral (light) */
+  --background: #f1f1f1;
+  --card: #f9f9f9;
+  --foreground: #1A1A1A;
+  --primary-cta: #1A1A1A;
+  --primary-cta-text: #FFFFFF;
+  --secondary-cta: #FFFFFF;
+  --secondary-cta-text: #1A1A1A;
+  --accent: #7A7A72;
+  --background-accent: #E5E4DF;
 
-  /* border radius: rounded */
+  /* border radius: soft */
   --radius: 1.5rem;
 
-  /* content width: narrow */
-  --width-content-width: clamp(30rem, 60vw, 60rem);
+  /* content width: standard */
+  --width-content-width: clamp(40rem, 72.5vw, 80rem);
 
   /* utilities */
   --vw-1_5: 1.5vw;
@@ -48,13 +47,6 @@
   --text-7xl: clamp(3rem, 4vw, 4rem);
   --text-8xl: clamp(3.5rem, 4.5vw, 4.5rem);
   --text-9xl: clamp(5.25rem, 7vw, 7rem);
-}
-
-/* Smaller laptops (< 14" MacBook) */
-@media (max-width: 1440px) and (min-width: 769px) {
-  :root {
-    --width-content-width: 75vw;
-  }
 }
 
 /* type scale: medium (mobile) */
@@ -96,8 +88,8 @@
   --color-background-accent: var(--background-accent);
 
   /* Fonts */
-  --font-sans: "Inter Tight", sans-serif;
-  --font-serif: "Caveat", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
   --font-tight: "Inter Tight", sans-serif;
   --font-mono: monospace;
 
@@ -134,48 +126,58 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(26, 26, 26, 0.15) rgba(0, 0, 0, 0);
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0);
 }
 
 html {
   overscroll-behavior: none;
-  overscroll-behavior-y: none;
 }
 
 body {
   margin: 0;
   background-color: var(--background);
   color: var(--foreground);
-  font-family: "Inter Tight", sans-serif;
+  font-family: "Inter", sans-serif;
   position: relative;
   min-height: 100vh;
   overscroll-behavior: none;
-  overscroll-behavior-y: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Inter", sans-serif;
+}
+
+.primary-button,
+.secondary-button,
+button.card {
+  min-height: 3.25rem;
+  min-width: 3.25rem;
+  font-size: var(--text-base);
 }
 
 .card {
-  backdrop-filter: blur(8px);
-  background: linear-gradient(to bottom right, color-mix(in srgb, var(--color-card) 95%, transparent), color-mix(in srgb, var(--color-card) 80%, transparent));
-  box-shadow: 0 1px 3px 0 color-mix(in srgb, var(--color-foreground) 6%, transparent), 0 1px 2px -1px color-mix(in srgb, var(--color-foreground) 6%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-foreground) 8%, transparent);
+  background: var(--color-card);
+  box-shadow: color-mix(in srgb, var(--color-primary-cta) 5%, transparent) 0px 0.706592px 0.706592px -0.666667px, color-mix(in srgb, var(--color-primary-cta) 3%, transparent) 0px 1.80656px 1.80656px -1.33333px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 3.62176px 3.62176px -2px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 6.8656px 6.8656px -2.66667px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 13.6468px 13.6468px -3.33333px, color-mix(in srgb, var(--color-primary-cta) 2%, transparent) 0px 30px 30px -4px;
+  box-shadow: none;
 }
 
 .primary-button {
-  background: var(--color-primary-cta);
-  box-shadow: none;
-}
-
-.secondary-button {
-  background: var(--color-secondary-cta);
-  box-shadow: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary-cta) 75%, var(--color-background)) -50%, var(--color-primary-cta) 75%);
   border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
-.font-serif {
-  font-family: "Caveat", sans-serif !important;
+.secondary-button {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-secondary-cta) 75%, var(--color-background)) -35%, var(--color-secondary-cta) 75%);
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
+  box-shadow: none;
 }
 
-.font-semibold,
-.font-medium {
-  font-weight: 400 !important;
+button.primary-button,
+button.secondary-button {
+  border-radius: 10rem;
 }

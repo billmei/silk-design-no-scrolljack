@@ -12,7 +12,7 @@ and it tells the agent to reach for them by default rather than only when asked.
 git clone https://github.com/<you>/silk-design ~/.claude/skills/silk-design
 ```
 
-Then ask for a site, or name a composition directly: `/silk-design coffee-shop`.
+Then ask for a site, or name a composition directly: `/silk-design Reference22`.
 
 ## What's in it
 

@@ -1,26 +1,26 @@
-/* luxury-real-estate — light & warm luxury */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap");
+/* Reference20 — warm personal blog */
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "../../assets/masks.css";
 @import "../../assets/animations.css";
 
 :root {
-  /* palette: warm-luxury (light) */
-  --background: #faf8f5;
+  /* palette: warm-personal (light) */
+  --background: #f5f3f0;
   --card: #ffffff;
   --foreground: #1a1a1a;
   --primary-cta: #1a1a1a;
-  --primary-cta-text: #faf8f5;
-  --secondary-cta: #f0ece6;
+  --primary-cta-text: #f5f3f0;
+  --secondary-cta: #f5f3f0;
   --secondary-cta-text: #1a1a1a;
-  --accent: #c9a96e;
-  --background-accent: #f0ece6;
+  --accent: #4CAF50;
+  --background-accent: #ebe7e1;
 
-  /* border radius: soft */
-  --radius: 0.75rem;
+  /* border radius: rounded */
+  --radius: 1.5rem;
 
-  /* content width: medium */
-  --width-content-width: clamp(40rem, 72.5vw, 100rem);
+  /* content width: narrow */
+  --width-content-width: clamp(30rem, 60vw, 60rem);
 
   /* utilities */
   --vw-1_5: 1.5vw;
@@ -34,26 +34,26 @@
   --width-carousel-item-4: calc(var(--width-content-width) / 4 - var(--vw-1_5) / 4 * 3);
 
   /* type scale: medium */
-  --text-2xs: clamp(0.465rem, 0.67vw, 0.62rem);
-  --text-xs: clamp(0.54rem, 0.77vw, 0.72rem);
-  --text-sm: clamp(0.615rem, 0.88vw, 0.83rem);
-  --text-base: clamp(0.69rem, 0.98vw, 0.93rem);
-  --text-lg: clamp(0.75rem, 1.06vw, 1.01rem);
-  --text-xl: clamp(0.825rem, 1.16vw, 1.11rem);
-  --text-2xl: clamp(0.975rem, 1.38vw, 1.31rem);
-  --text-3xl: clamp(1.2rem, 1.7vw, 1.62rem);
-  --text-4xl: clamp(1.5rem, 2.12vw, 2.02rem);
-  --text-5xl: clamp(2.025rem, 2.9vw, 2.78rem);
-  --text-6xl: clamp(2.475rem, 3.48vw, 3.33rem);
-  --text-7xl: clamp(3rem, 4.24vw, 4.05rem);
-  --text-8xl: clamp(3.5rem, 4.76vw, 4.55rem);
-  --text-9xl: clamp(5.25rem, 7.4vw, 7.1rem);
+  --text-2xs: clamp(0.465rem, 0.62vw, 0.62rem);
+  --text-xs: clamp(0.54rem, 0.72vw, 0.72rem);
+  --text-sm: clamp(0.615rem, 0.82vw, 0.82rem);
+  --text-base: clamp(0.69rem, 0.92vw, 0.92rem);
+  --text-lg: clamp(0.75rem, 1vw, 1rem);
+  --text-xl: clamp(0.825rem, 1.1vw, 1.1rem);
+  --text-2xl: clamp(0.975rem, 1.3vw, 1.3rem);
+  --text-3xl: clamp(1.2rem, 1.6vw, 1.6rem);
+  --text-4xl: clamp(1.5rem, 2vw, 2rem);
+  --text-5xl: clamp(2.025rem, 2.75vw, 2.75rem);
+  --text-6xl: clamp(2.475rem, 3.3vw, 3.3rem);
+  --text-7xl: clamp(3rem, 4vw, 4rem);
+  --text-8xl: clamp(3.5rem, 4.5vw, 4.5rem);
+  --text-9xl: clamp(5.25rem, 7vw, 7rem);
 }
 
 /* Smaller laptops (< 14" MacBook) */
 @media (max-width: 1440px) and (min-width: 769px) {
   :root {
-    --width-content-width: 87.5vw;
+    --width-content-width: 75vw;
   }
 }
 
@@ -97,7 +97,7 @@
 
   /* Fonts */
   --font-sans: "Inter Tight", sans-serif;
-  --font-serif: "Cormorant Garamond", sans-serif;
+  --font-serif: "Caveat", sans-serif;
   --font-tight: "Inter Tight", sans-serif;
   --font-mono: monospace;
 
@@ -153,19 +153,10 @@ body {
   overscroll-behavior-y: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Cormorant Garamond", sans-serif;
-}
-
 .card {
   backdrop-filter: blur(8px);
-  background: linear-gradient(to bottom right, color-mix(in srgb, var(--color-card) 90%, transparent), color-mix(in srgb, var(--color-card) 70%, transparent));
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  background: linear-gradient(to bottom right, color-mix(in srgb, var(--color-card) 95%, transparent), color-mix(in srgb, var(--color-card) 80%, transparent));
+  box-shadow: 0 1px 3px 0 color-mix(in srgb, var(--color-foreground) 6%, transparent), 0 1px 2px -1px color-mix(in srgb, var(--color-foreground) 6%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-foreground) 8%, transparent);
 }
 
@@ -177,14 +168,11 @@ h6 {
 .secondary-button {
   background: var(--color-secondary-cta);
   box-shadow: none;
-  border: none;
+  border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
-.primary-button,
-.secondary-button,
-button.card {
-  min-height: 3rem;
-  min-width: 3rem;
+.font-serif {
+  font-family: "Caveat", sans-serif !important;
 }
 
 .font-semibold,
