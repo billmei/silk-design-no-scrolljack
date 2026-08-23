@@ -2,7 +2,7 @@
 
 23 worked reference compositions built from **this exact toolbox**. Pull one up as a starting
 point: a coherent palette + font + section rhythm + effect set that already hangs together.
-Triggered by `/silk-design Reference7` or "build this like the cream-and-espresso one". A number
+Triggered by `/silk-design-no-scrolljack Reference7` or "build this like the cream-and-espresso one". A number
 resolves directly; a described mood resolves against the vibe line of each row.
 
 ## The contract — reference, don't clone
@@ -17,9 +17,10 @@ A referenced site is a **mood-board + wireframe, not a source file.** Take its *
 - **Flesh — off-limits:** copy, images, brand, business specifics, and 1:1 layout. The new
   site has its own subject — write and lay it out for that.
 
-The built-in foundation (Lenis root, 9-token system, fluid type, the one reveal config)
+The built-in foundation (native scroll, 9-token system, fluid type, the one reveal config)
 always applies underneath — see `SKILL.md`. The referenced site only decides the *look* and
-*rhythm* on top of it.
+*rhythm* on top of it. **No row's effect set overrides the no-scrolljack rule:** if a flow below
+tempts you toward a pin or a scrub, ship the one-shot equivalent from `references/effects.md`.
 
 ## How to read a row
 `ReferenceN` — vibe. Then palette / type / skin, the section **Flow**, and
@@ -27,7 +28,8 @@ the **Signature** effects worth stealing. Type is **Inter** (body) + **Inter Tig
 (headings) unless a row says *"Inter Tight throughout"* (a tighter, more editorial feel).
 Every row is self-contained. For the full 9-token palette and the exact card/button CSS behind a
 row's skin, read `templates/ReferenceN/theme.css` — a palette, a font, and three CSS recipes.
-All compositions assume React + Vite + Tailwind v4 + motion + GSAP + Lenis.
+All compositions assume React + Vite + Tailwind v4 + motion + GSAP. Native scroll throughout — no
+smooth-scroll library.
 
 ---
 
@@ -35,8 +37,8 @@ All compositions assume React + Vite + Tailwind v4 + motion + GSAP + Lenis.
 
 **`Reference1`** — dark, high-gloss, confident.
 Palette **dark**: bg `#0a0a0a` · fg `#f5f5f5` · cta+accent `#ff7a1a` (premium orange). Skin: soft radius `1.5rem` · glass-elevated cards · gradient/glass buttons · hover *expand* · text *slide-up*.
-Flow: NavbarCentered → HeroBillboardFeatures → FeaturesStickyCards → TestimonialMarqueeOverlayCards → FeaturesComparison → TeamOverlayCards → FaqSimple → ContactSplitForm → FooterSimpleCard.
-Signature: `lightRaysCenter` hero glow · pinned **sticky feature cards** · testimonial marquee.
+Flow: NavbarCentered → HeroBillboardFeatures → FeaturesStagedCards → TestimonialMarqueeOverlayCards → FeaturesComparison → TeamOverlayCards → FaqSimple → ContactSplitForm → FooterSimpleCard.
+Signature: `lightRaysCenter` hero glow · **staged feature cards** (one-shot stagger, no pin) · testimonial marquee.
 
 **`Reference2`** — clean, trustworthy, corporate blue.
 Palette **light**: bg `#f8fafc` · fg `#0f172a` · cta `#1d4ed8` · accent `#3b82f6`. Skin: soft radius `1.5rem` · glass-elevated cards · gradient/glass buttons · hover *arrow* · text *slide-up*.
@@ -111,8 +113,8 @@ Signature: **`gradientBars`** hero bg · **3D tilted-cards hero** · magnetic bu
 
 **`Reference15`** — light, warm, cinematic.
 Palette **light**: bg `#faf8f5` · fg `#1a1a1a` · cta `#1a1a1a` · accent `#c9a96e` (warm gold). *Inter Tight throughout.* Skin: soft radius `0.75rem` · hover *stagger* · text *fade* · display font **Cormorant Garamond**.
-Flow: NavbarFullscreenStatic → HeroVideoScroll → AboutTextFill → FeaturesMediaColumns → ContactParallaxCard → FooterBasic.
-Signature: **scroll-scrubbed video hero** (`HeroVideoScroll`) · **reading word-fill** (`AboutTextFill`) · parallax contact card. *The showcase for silk's premium scroll effects.*
+Flow: NavbarFullscreenStatic → HeroVideo → AboutTextFill → FeaturesMediaColumns → ContactParallaxCard → FooterBasic.
+Signature: **full-bleed video hero** (`HeroVideo`, exit parallax) · **reading word-fill** (`AboutTextFill`) · parallax contact card. *The showcase for silk's scroll-linked effects — all of it on a page that scrolls 1:1.*
 
 **`Reference16`** — dark, hushed, champagne luxury.
 Palette **dark**: bg `#0f1010` · fg `#f5f0eb` · cta `#ffffff` · accent `#d4b896` (champagne). *Inter Tight throughout.* Skin: rounded radius `1rem` · subtle-dark cards · white/subtle-dark buttons · hover *default* · text *slide-up* · display font **Playfair Display**.

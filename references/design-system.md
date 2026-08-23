@@ -160,10 +160,11 @@ Three contrasting recipes verbatim (drop into your CSS, replacing the `.card`/`.
   border: 1px solid color-mix(in srgb, var(--color-foreground) 10%, transparent); }
 ```
 
-## 7. Smoothness setup recap
-- Lenis `<ReactLenis root>` at the app root (not CSS `scroll-behavior`).
-- `html, body { overscroll-behavior: none; }` — kills the rubber-band bounce.
-- Thin recolored scrollbar via `scrollbar-width: thin; scrollbar-color: … transparent;`.
+## 7. Polish setup recap
+- **Native scroll.** No smooth-scroll provider at the root, no CSS `scroll-behavior`, no
+  `overscroll-behavior: none` — the bounce and the 1:1 wheel mapping belong to the platform.
+- Thin recolored scrollbar via `scrollbar-width: thin; scrollbar-color: … transparent;` — cosmetic
+  only, and the one scroll-adjacent thing worth styling.
 - Mask-fade utilities (`.mask-fade-x`, `.mask-fade-y`, …) in `assets/masks.css` — feather the edges of
   marquees, carousels, and background layers so nothing hard-cuts.
 - Keyframe library (marquee, aurora, orbit, spin-slow, floating, ray-pulse, progress) in `assets/animations.css`.

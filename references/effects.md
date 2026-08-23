@@ -1,8 +1,13 @@
 # Effects catalog — exact configs
 
 Every config below is a tuned default. The numbers carry the feel — use them as given unless you
-have a reason not to. Group: entrance · scroll-driven · cursor/pointer · hover · marquees/carousels ·
+have a reason not to. Group: entrance · scroll-linked · cursor/pointer · hover · marquees/carousels ·
 navigation & page transitions · loaders.
+
+**Nothing here touches scroll position.** Every effect either fires *once* when an element enters
+view, or maps scroll progress onto a transform *inside* an element that occupies its natural
+height. No pins, no `scrub`, no tall spacers with `sticky` frames, no smooth-scroll library. If a
+recipe would make the page hold still while the scrollbar keeps moving, it isn't in this file.
 
 ---
 
@@ -25,7 +30,11 @@ the very edge — so content is already moving before the user reaches it. `once
 
 ---
 
-## Scroll-driven effects
+## Scroll-linked effects
+
+These react to scroll — either by mapping progress onto a transform, or by firing once on entry.
+Neither *consumes* scroll: every section is as tall as its content, so the page keeps travelling
+1:1 with the wheel while the layers inside move.
 
 ### Parallax (two-layer depth) — `motion/react`
 Layers move at different rates as the section scrolls past. Principle: map scroll progress → transform.
@@ -42,18 +51,25 @@ Big paragraph where each word brightens `0.15 → 1` opacity as you scroll throu
 - `useScroll({ target, offset: ["start 0.8", "start 0.2"] })`.
 - Per word `i` of `n`: `useTransform(scrollYProgress, [i/n, (i+1)/n], [0.15, 1])`.
 
-### Scroll-scrubbed video — `assets/HeroVideoScroll.tsx` (GSAP)
-Video scrubs frame-by-frame as you scroll — feels like a controlled cinematic. The showstopper hero.
-- Outer `h-[300vh]`, inner `sticky top-0 h-svh`.
-- `ScrollTrigger.create({ trigger, start: "top top", end: "bottom bottom", scrub: 0.5, onUpdate: self => { video.currentTime = video.duration * self.progress } })`.
-- Video: `muted playsInline preload="auto"`. Wait for `canplaythrough` (8s fallback) before wiring.
-- Includes a clip-path loader (see Loaders) and content entrance `opacity:0,y:30 → dur 0.8, delay 0.2/0.4, ease [0.22, 1, 0.36, 1]`.
+### Full-bleed video hero — `assets/HeroVideo.tsx`
+The showstopper hero, at one viewport height. The video plays itself; scroll is untouched.
+- `h-svh overflow-hidden`, video `autoPlay muted loop playsInline preload="auto"`, `object-cover`.
+- Clip-path wipe opens the frame from a centre band once `loadeddata` fires (8s fallback), which
+  hides the first-frame pop-in: `inset(45% 0% 45% 0%) → inset(0%)`, `dur 1.1, ease [0.22, 1, 0.36, 1]`.
+- Exit parallax on the media layer (below), content entrance `opacity:0,y:30 → dur 0.8, delay 0.2/0.4`.
+- `motion-reduce:` swaps the loop for the poster still.
+- **Not** a scrub. Don't reach for a 300vh spacer + `sticky` frame + `video.currentTime = duration *
+  progress` — that's the pinned pattern this kit exists to avoid.
 
-### Pinned + scrubbed card stack — GSAP ScrollTrigger
-Section holds still while inner cards animate on scroll. Principle: tall section + `sticky` inner + scrub.
-- Section height `= items.length * 100vh`; inner `sticky top-0 h-screen`.
-- Per card: `gsap.fromTo(card, { xPercent: ±225, rotation: ±45 }, { xPercent: 0, rotation: ±10, scrollTrigger: { trigger, start: "top bottom", end: "top top", scrub: 1 } })`.
-- Or fade a stack out one-by-one: `sticky top-[12.5vh] h-[75vh]`, scrub `opacity → 0`, `ease: "none"`.
+### Staged card stack — one-shot, no pin
+The "cards fly into place" moment, without freezing the page. Principle: a normal-height section,
+a `whileInView` stagger instead of a scrub.
+- Section is its natural content height. Cards sit in their final grid/stack positions in the DOM.
+- Per card `i`: `initial={{ xPercent: ±60, rotate: ±12, opacity: 0 }}`, `whileInView={{ xPercent: 0,
+  rotate: ±4, opacity: 1 }}`, `viewport={{ once: true, margin: "-20%" }}`,
+  `transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}`.
+- Want the fanned look to persist? Keep the resting `rotate` non-zero and let hover push the cards
+  apart (see "Hover fan-out stack") — the depth comes from the layout, not from scroll length.
 
 ### Hero exit-parallax (scroll-away)
 The hero's media drifts down and zooms as you scroll *off* it — the "leave-behind" counterpart to
@@ -79,16 +95,16 @@ const scale  = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
 ```
 Mobile: skip the JS, ship a static `rotate-x-20`.
 
-### Stack-to-grid scroll (FLIP-style) — GSAP
-Cards start stacked/fanned inside the hero, then scrub back into their natural grid slots in the next
-section as you scroll (`HeroWorkScrollStack`, the portfolio showcase). The trick: **measure, then
-transform** — cards live in their final grid position in the DOM; compute the delta to the hero
-placeholder and set it as the initial transform.
+### Stack-to-grid (FLIP-style) — GSAP, one-shot
+Cards start stacked/fanned and settle into their natural grid slots when the grid enters view (the
+portfolio showcase). The trick: **measure, then transform** — cards live in their final grid position
+in the DOM; compute the delta to the fanned placeholder and set it as the initial transform.
 - `yOffset = placeholderCenterY - cardCenterY` (from `getBoundingClientRect`), plus per-card
   `x` offsets, `rotation: [-5, 0, 5]`, `scale: ~1.3`, staggered `zIndex`.
-- Desktop: one timeline, `scrollTrigger: { trigger: wrapper, start: "top top", end: "bottom bottom", scrub: 1 }`,
-  each card `tl.to(card, { x: 0, y: 0, rotation: 0, scale: 1 }, 0)`.
-- Mobile: same `gsap.set`, but a plain tween with `scrollTrigger: { start: "top 35%", toggleActions: "play none none reverse" }`.
+- Play it as a **timed** tween gated on entry, not a scrub:
+  `scrollTrigger: { trigger: grid, start: "top 75%", once: true }`, then
+  `gsap.to(cards, { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.9, stagger: 0.06, ease: "power3.out" })`.
+  No `pin`, no `scrub`, no `end` that outruns the section.
 - Always `gsap.set(card, { willChange: "transform", force3D: true })` first.
 
 ### Footer reveal-from-behind — `assets/FooterBrandReveal.tsx`
@@ -265,7 +281,7 @@ A brand-colored SVG spiral covers the viewport and "unwinds" itself away on page
 
 ## Loaders & clip-path reveals
 
-### Clip-path wipe loader — in `assets/HeroVideoScroll.tsx`
+### Clip-path wipe loader — in `assets/HeroVideo.tsx`
 A full-screen loader that wipes the brand name in, then lifts away.
 - Text reveal: `clipPath: "inset(0% 100% 0% 0%)" → "inset(0% 0% 0% 0%)"`, `transition={{ duration: 2, ease: [0.76, 0, 0.24, 1] }}`.
 - Progress bar: `scaleX: 0 → 1`, `originX: 0`.

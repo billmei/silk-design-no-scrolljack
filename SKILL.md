@@ -1,46 +1,65 @@
 ---
-name: silk-design
+name: silk-design-no-scrolljack
 description: >-
-  Build websites and web UI with smooth, polished, high-end motion by default —
-  the buttery feel of premium sites, not static slop. Use when building or
-  restyling any website, landing page, hero, marketing page, portfolio, or web
-  UI; when adding scroll animations, reveals, parallax, marquees, hover effects,
-  page transitions, smooth scrolling, or micro-interactions; or when a page feels
-  flat, generic, or unrefined and needs to feel alive. A capability catalog of
-  proven motion + smoothness + design-token techniques (Lenis, Framer Motion,
-  GSAP, Tailwind v4) for interfaces that feel crafted rather than assembled.
+  Build websites and web UI with polished, high-end motion by default — the
+  crafted feel of premium sites, not static slop — while leaving the browser's
+  native scroll completely alone. Use when building or restyling any website,
+  landing page, hero, marketing page, portfolio, or web UI; when adding scroll
+  reveals, parallax, marquees, hover effects, page transitions, or
+  micro-interactions; or when a page feels flat, generic, or unrefined and needs
+  to feel alive. A capability catalog of proven motion + design-token techniques
+  (Framer Motion, GSAP, Tailwind v4) for interfaces that feel crafted rather
+  than assembled. Explicitly excludes smooth-scroll libraries, CSS
+  `scroll-behavior: smooth`, and every pinned or scrub-driven section — scroll
+  stays 1:1 with the wheel.
 ---
 
 # silk — your web-craft toolbox
 
 This is a reminder of what you can do. Like an artist who knows their tools: when you build
-for the web, you are not limited to static sections and default scrollbars. You have a full
-palette of motion and smoothness that reads as "expensive." **Reach for it by default.**
+for the web, you are not limited to static sections. You have a full palette of motion that
+reads as "expensive." **Reach for it by default.**
 
-The rule: **never ship a static page.** A smooth-scroll root + a reveal-on-scroll + one
-signature effect is ~15 lines and turns generic output into something that feels crafted.
-The trick behind these sites isn't exotic code — it's a *small, consistent* set of levers
-applied everywhere. Consistency is what reads as clean.
+The rule: **never ship a static page.** A reveal-on-scroll + one signature effect is ~15
+lines and turns generic output into something that feels crafted. The trick behind these
+sites isn't exotic code — it's a *small, consistent* set of levers applied everywhere.
+Consistency is what reads as clean.
+
+## The hard constraint: never touch the scroll
+
+Everything here runs *alongside* the browser's scroll, never in place of it. One wheel notch
+moves the page exactly as far as the OS says it should, on every build. That rules out:
+
+- **Smooth-scroll libraries** — Lenis, Locomotive, `@studio-freight/*`, GSAP ScrollSmoother.
+  Don't install them, don't wrap the app in them.
+- **CSS `scroll-behavior: smooth`** and `scrollTo/scrollIntoView({ behavior: "smooth" })`.
+  Anchor links jump. Instantly. See `assets/useButtonClick.ts`.
+- **Pinned or scrubbed sections** — no `ScrollTrigger` `pin`/`scrub`, no tall spacer with a
+  `sticky` frame inside it, no section that holds still while the scrollbar keeps moving.
+- **`overscroll-behavior: none`** on `html`/`body` — the rubber-band bounce is the platform's,
+  leave it.
+
+What stays allowed: motion *triggered* by scroll (one-shot entrance reveals), and motion
+*linked* to scroll that never changes where the page is (parallax, a hero drifting as it
+exits, an element tilting flat, words brightening as they pass). If an effect makes the user
+scroll further than the content is tall, or makes the page lag behind their input, it's out.
 
 ## Stack this assumes
 React + Vite + **Tailwind v4** + **`motion`** (Framer Motion, `motion/react`) + **GSAP**
-(`gsap` + `@gsap/react`; plugins used: ScrollTrigger, Draggable, DrawSVGPlugin — all free) +
-**Lenis** (smooth scroll). Each technique below names its principle so it transfers to other
-stacks. `cls()`/`cn()` helpers → `assets/utils.ts`.
+(`gsap` + `@gsap/react`; plugins used: Draggable, DrawSVGPlugin, and ScrollTrigger *only* as
+an on-screen gate — never for `pin` or `scrub`). Each technique below names its principle so
+it transfers to other stacks. `cls()`/`cn()` helpers → `assets/utils.ts`.
 
 ## The non-negotiable foundation (apply on EVERY build)
 
-This is the baseline that makes everything feel smooth. Four things, always:
+This is the baseline. Four things, always:
 
-1. **Lenis smooth scroll at the root.** Wrap the app once. Do **not** use CSS `scroll-behavior`.
-   ```tsx
-   import { ReactLenis } from 'lenis/react'
-   <ReactLenis root>{app}</ReactLenis>
-   ```
-   Anchor links scroll via `useLenis().scrollTo(el)` — see `assets/useButtonClick.ts`.
-2. **Kill scroll bounce + thin the scrollbar** in global CSS:
+1. **Native scroll at the root.** Nothing wraps the app. No scroll library, no
+   `scroll-behavior`, no scroll listener that calls `scrollTo`. Anchor links jump with
+   `element.scrollIntoView({ block: "start" })` — see `assets/useButtonClick.ts`.
+2. **Thin the scrollbar** in global CSS — the one scroll-adjacent thing worth styling,
+   because it's cosmetic and changes no behaviour:
    ```css
-   html, body { overscroll-behavior: none; }
    * { scrollbar-width: thin; scrollbar-color: rgb(0 0 0 / 0.3) transparent; }
    ```
 3. **Token architecture** — ~9 CSS custom properties on `:root`, exposed to Tailwind via
@@ -62,7 +81,7 @@ Drop-in components: `assets/ScrollReveal.tsx` (blocks), `assets/TextAnimation.ts
 Each points to a reference file (loaded only when you need it) and/or a drop-in `assets/` file.
 
 - **Entrance reveals** — word-stagger headings, slide-up / fade-blur blocks. → `references/effects.md`, `assets/{TextAnimation,ScrollReveal}.tsx`
-- **Scroll-driven effects** — parallax (`useScroll`/`useTransform`), hero exit-parallax, pinned + scrubbed sections, scroll-scrubbed video, tilt-flatten billboard, stack-to-grid (FLIP), reading word-fill, footer reveal-from-behind. → `references/effects.md`, `assets/{HeroVideoScroll,AboutTextFill,FooterBrandReveal}.tsx`
+- **Scroll-linked effects** (page position untouched) — parallax (`useScroll`/`useTransform`), hero exit-parallax, tilt-flatten billboard, reading word-fill, footer reveal-from-behind. → `references/effects.md`, `assets/{HeroVideo,AboutTextFill,FooterBrandReveal}.tsx`
 - **Cursor & pointer** — GSAP cursor image-trail, magnetic buttons (spring `150/15`), pointer-tracked border glow, cursor-mask character pattern, draggable stickers. → `references/effects.md`, `assets/{AboutCursorTrail,ButtonMagnetic,BorderGlow,HoverPattern}.tsx`
 - **Hover micro-interactions** — 12 button styles (expand, elastic, flip, slide, bounce…), the grid-fr expand-to-auto trick, image reveal cards, 3D flip cards, staged hover scenes. → `references/effects.md`
 - **Marquees & carousels** — infinite CSS scroll with edge-mask fade, deck carousel, focus loop, filter-swap. → `references/effects.md`, `assets/{animations,masks}.css`
@@ -71,9 +90,9 @@ Each points to a reference file (loaded only when you need it) and/or a drop-in 
 - **The design system** — token architecture, fluid type, `--radius` scale, font pairings + the accent-font slot, full-width wordmarks (`assets/AutoFillText.tsx`), and **10 instant "style" skins** (glass, minimal, neon, elegant, bold…) = swap only card CSS + button CSS + radius + font. → `references/design-system.md`
 - **Page composition** — section archetypes (hero/features/testimonial/pricing/faq/CTA), the canonical section-header pattern, **bento live-widget menu**, navbar archetypes, responsive-padding scale, how to assemble a page. → `references/composition.md`
 
-## Reference a worked example — `/silk-design <name>`
+## Reference a worked example — `/silk-design-no-scrolljack <name>`
 The catalog carries **23 worked reference compositions** built from this exact toolbox. When the
-user names one (`/silk-design Reference15`, `/silk-design Reference1`, or "build it
+user names one (`/silk-design-no-scrolljack Reference15`, `/silk-design-no-scrolljack Reference1`, or "build it
 like the coffee one"), pull it from `references/templates.md` — palette, font, section rhythm, and the signature
 effects it used. A number resolves directly; a described mood resolves against each row's vibe line.
 **A referenced composition is a mood-board + wireframe, not a source file:** take its **skin**
@@ -85,7 +104,7 @@ subject; build for that. The non-negotiable foundation above still applies under
 They are **drop-in reference implementations** — copy and adapt. Simple
 primitives (`ScrollReveal`, `TextAnimation`, `ButtonMagnetic`, `AutoFillText`, `BorderGlow`,
 `HoverPattern`, `PageTransitionSwirl`, `useButtonClick`, `utils`, the `.css`) drop in cleanly.
-The section showpieces (`AboutCursorTrail`, `HeroVideoScroll`, `AboutTextFill`,
+The section showpieces (`AboutCursorTrail`, `HeroVideo`, `AboutTextFill`,
 `FooterBrandReveal`, `NavbarFullscreen`) are self-contained and take an `actions` slot — pass your
 own buttons in as children rather than wiring a component import. Backgrounds need the `--color-*`
 tokens from `foundation.css`. (`FooterBrandReveal` needs `AutoFillText` — both are here.)

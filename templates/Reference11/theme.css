@@ -135,11 +135,6 @@
   scrollbar-color: rgba(16, 111, 235, 0.3) rgba(0, 0, 0, 0);
 }
 
-html {
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
-}
-
 body {
   margin: 0;
   background-color: var(--background);
@@ -147,8 +142,6 @@ body {
   font-family: "Inter", sans-serif;
   position: relative;
   min-height: 100vh;
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
 }
 
 h1,

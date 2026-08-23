@@ -5,7 +5,7 @@ follows, and the authoring rules that keep 100 sections feeling like one system.
 
 ## Page skeleton (assembly order)
 ```tsx
-<ReactLenis root>                    {/* smooth scroll — once, at the top */}
+<>                                   {/* nothing wraps the app — scroll stays native */}
   {/* optional: <SiteBackground position="fixed" /> behind everything */}
   <Navbar logo="BRAND" navItems={…} ctaButton={…} />
   <main>
@@ -15,9 +15,11 @@ follows, and the authoring rules that keep 100 sections feeling like one system.
     …pricing · testimonials · faq · cta…
   </main>
   <Footer brand="BRAND" columns={…} />
-</ReactLenis>
+</>
 ```
-- Each section gets an `id` (for anchor-scroll via `useButtonClick`/Lenis) + a `data-section` name.
+- No smooth-scroll provider at the root, and no section taller than its own content. The page's
+  total height is the sum of what's actually on it.
+- Each section gets an `id` (anchor-scroll jumps natively via `useButtonClick`) + a `data-section` name.
 - Sections take **flat content props** (`tag`, `title`, `description`, `primaryButton:{text,href}`,
   `items[]`, `imageSrc`/`videoSrc`, `textAnimation`) — no nested config objects.
 
@@ -86,13 +88,13 @@ their edges so they read as *inside* the card, not pasted on.
 fullscreen curtain for editorial/luxury/portfolio.
 
 ## Section archetype menu (what to reach for)
-- **Hero** — split (text + media), billboard (full-bleed image + overlay), scroll-scrubbed video
-  (`assets/HeroVideoScroll.tsx`), pinned card-stack, floating-cards, tilted carousel, **brand
+- **Hero** — split (text + media), billboard (full-bleed image + overlay), full-bleed video
+  (`assets/HeroVideo.tsx`), staged card-stack, floating-cards, tilted carousel, **brand
   wordmark** (giant name spanning full width via `assets/AutoFillText.tsx`), sticker-flip
   (draggable stickers + 3D flip card — effects.md), stack-to-grid work reel (effects.md).
 - **Features** — icon/media cards, **bento grid** (mixed-size cards with live mini-widgets — see
-  "Bento live widgets" above), **pinned sticky cards** (scrub), 3D flip cards, alternating split,
-  comparison table, filterable grid, image **reveal cards** (hover panel + expanding description).
+  "Bento live widgets" above), **staged card stack** (one-shot stagger), 3D flip cards, alternating
+  split, comparison table, filterable grid, image **reveal cards** (hover panel + expanding description).
 - **About / editorial** — reading word-fill (`assets/AboutTextFill.tsx`), two-layer parallax, cursor
   image-trail (`assets/AboutCursorTrail.tsx`), text+media split.
 - **Testimonials** — dual-row horizontal marquee, vertical column marquee, avatar/quote/rating cards.
@@ -108,8 +110,11 @@ Follow these when you write sections:
 - **Flat > nested, explicit > implicit.** One file per section, content variables at the top. Don't split
   a section into sub-components. Keep sections under ~100 lines, UI primitives under ~50.
 - **Single default export** per file. No compound components, no `className` prop drilling — edit classes in-file.
-- **Framer Motion `whileInView` for element animation; GSAP only for scroll-scrub / pin / timeline work**
-  (scrubbed video, cursor trail, pinned stacks). Don't reach for GSAP when a `whileInView` does it.
+- **Framer Motion `whileInView` for element animation; GSAP only for timeline / pointer work**
+  (cursor trail, draggable stickers, DrawSVG transitions). Don't reach for GSAP when a `whileInView`
+  does it — and never for `pin` or `scrub`, which are out of scope for this kit.
+- **No section is taller than its content.** A `h-[300vh]` wrapper with a `sticky` child is the
+  scrolljack tell; if a moment needs more time, give it a stagger, not more scrollbar.
 - **Class order:** layout → spacing → sizing → typography → colors → effects. (Consistent, greppable.)
 - Media from a CDN, never committed. `object-cover` + a fixed `aspect-*` box so images never jump.
 - One animated background per page, low opacity. One button hover-personality per site.

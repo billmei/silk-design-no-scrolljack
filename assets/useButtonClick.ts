@@ -1,22 +1,17 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useLenis } from "lenis/react";
 
 export const useButtonClick = (href?: string, onClick?: () => void) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const lenis = useLenis();
 
+  // Native, instant jump. No smooth-scroll library and no `behavior: "smooth"`:
+  // the browser puts the section at the top the moment the link is clicked, so
+  // the scrollbar never animates out from under the user.
   const scrollToElement = (sectionId: string, delay: number = 100) => {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
-      if (element) {
-        if (lenis) {
-          lenis.scrollTo(element, { offset: 0 });
-        } else {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
+      element?.scrollIntoView({ block: "start" });
     }, delay);
   };
 
